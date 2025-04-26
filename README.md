@@ -21,13 +21,6 @@ Install dependencies using:
 ```bash
 pip install -r requirements.txt
 ```
-Required packages:
-- `pennylane==0.38.0`
-- `numpy==1.26.4`
-- `scikit-learn==1.5.1`
-- `pandas==2.2.3`
-- `matplotlib==3.9.2`
-- `joblib==1.4.2`
 
 ## Usage
 1. **Train Models**: Execute `train.py` to train QFNN and QBPNN, saving models and logs.
