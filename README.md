@@ -38,19 +38,7 @@ To reproduce the paper’s results:
 4. Inspect logs in `logs/` for training details (e.g., early stopping, validation loss).
 5. Load `.joblib` models in `models/` to test predictions.
 
-## Citation
-Please cite our arXiv preprint:
-```bibtex
-@misc{malla2025,
-  title={Quantum Neural Networks for Binary Classification: Evaluating Feedforward and Back Propagation Architectures},
-  author={Sahaj Raj Malla and Sudan Jha},
-  year={2025},
-  eprint={arXiv:XXXX.XXXXX},
-  archivePrefix={arXiv},
-  primaryClass={quant-ph}
-}
-```
-(Update `XXXX.XXXXX` with the arXiv ID after submission.)
+
 
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for details.
