@@ -227,6 +227,9 @@ def run_experiment_for_combination(args, shared_results):
     logger.info(f"🚀 Starting experiment for {dataset_name} with {model_class.__name__} and {config_name}")
 
     try:
+        # FIX 2: model_params now includes full hyperparameters (epochs, lr, measurement_type)
+        # so the model can be fully configured from the configurations list without
+        # touching class defaults, making reproduction straightforward.
         model = model_class(**model_params)
         cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
         accuracies = []
@@ -269,6 +272,8 @@ def run_experiment_for_combination(args, shared_results):
         recall = recall_score(y_test, y_pred)
         f1 = f1_score(y_test, y_pred)
         duration = (datetime.now() - start_time).total_seconds()
+        # FIX 1: removed duplicate save call that was previously also appearing
+        # after shared_results.append below, causing the file to be written twice.
         model.save_model(f"{dataset_name}_{model_class.__name__}_{config_name}_model.pkl")
 
         logger.info(f"✅ Completed in {duration:.2f}s | Test Accuracy: {acc:.2%}, Precision: {precision:.2%}, Recall: {recall:.2%}, F1: {f1:.2%}")
@@ -286,7 +291,6 @@ def run_experiment_for_combination(args, shared_results):
             'Layers': model.n_layers
         }
         shared_results.append(result)
-        model.save_model(f"{dataset_name}_{model_class.__name__}_{config_name}_model.pkl")
 
     except Exception as e:
         logger.error(f"❌ Failed configuration: {dataset_name}_{model_class.__name__}_{config_name}")
@@ -320,11 +324,13 @@ def run_quantum_experiment():
         "Iris (2D)": (load_iris().data[:, :2], (load_iris().target != 2).astype(int))
     }
 
-    # Define model configurations
+    # FIX 2: each configuration now includes the full set of hyperparameters so
+    # anyone reproducing the experiments can adjust epochs, lr, or measurement_type
+    # directly here without modifying class defaults.
     configurations = [
-        ('Phase and Measure', {'use_phase': True, 'use_interference': False}),
-        ('Interference and Measure', {'use_phase': False, 'use_interference': True}),
-        ('All', {'use_phase': True, 'use_interference': True})
+        ('Phase and Measure', {'use_phase': True, 'use_interference': False, 'epochs': 100, 'lr': 0.1, 'measurement_type': 'expval'}),
+        ('Interference and Measure', {'use_phase': False, 'use_interference': True, 'epochs': 100, 'lr': 0.1, 'measurement_type': 'expval'}),
+        ('All', {'use_phase': True, 'use_interference': True, 'epochs': 100, 'lr': 0.1, 'measurement_type': 'expval'})
     ]
 
     # Prepare combinations for parallel processing
