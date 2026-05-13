@@ -1,6 +1,6 @@
 # Quantum Neural Networks for Binary Classification
 
-This repository contains the src, training logs, results, and models for the paper *"Quantum Neural Networks for Binary Classification: Evaluating Feedforward and Back Propagation Architectures"* by Sahaj Raj Malla and Sudan Jha, submitted to arXiv in 2025. The study evaluates two quantum neural network architectures—Quantum Feedforward Neural Network (QFNN) and Quantum Backpropagation Neural Network (QBPNN)—for binary classification across six datasets using the PennyLane framework.
+This repository contains the src, training logs, results, and models for the paper *"Quantum Neural Networks for Binary Classification: Evaluating Feedforward and Back Propagation Architectures"* by Sahaj Raj Malla and Sudan Jha. The study evaluates two quantum neural network architectures—Quantum Feedforward Neural Network (QFNN) and Quantum Backpropagation Neural Network (QBPNN)—for binary classification across six datasets using the PennyLane framework.
 
 ## Overview
 The project implements QFNN (3 interference layers) and QBPNN (6 layers with residual connections) to classify datasets including Linear Blobs, XOR, Circles, Moons, Gaussian Quantiles, and Iris (2D). Experiments use classical simulations with 2 qubits, assessing performance via accuracy, precision, recall, and F1 score under three configurations: Phase and Measure, Interference and Measure, and All.
